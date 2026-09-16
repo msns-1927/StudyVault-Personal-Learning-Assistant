@@ -1,0 +1,79 @@
+# ==============================
+# StudyVault - Python / FastAPI / Streamlit
+# ==============================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# ---------- Environment Variables ----------
+.env
+.env.*
+!.env.example
+
+# ---------- IDE / Editors ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ---------- Testing ----------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+
+# ---------- Logs ----------
+*.log
+logs/
+
+# ---------- StudyVault Data ----------
+# Uploaded PDFs/documents
+data/uploads/
+
+# ChromaDB vector database
+data/vector_db/
+
+# SQLite database
+data/studyvault.db
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# ---------- Temporary Files ----------
+tmp/
+temp/
+*.tmp
+*.temp
+
+# ---------- Build / Packaging ----------
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ---------- Streamlit ----------
+.streamlit/secrets.toml
+
+# ---------- OS Generated Files ----------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
