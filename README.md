@@ -1,12 +1,17 @@
 # 📚 StudyVault-Personal-Learning-Assistant
 
+<p align="center">
+<img width="800" alt="ChatGPT Image Sep 16, 2026, 11_11_14 PM" src="https://github.com/user-attachments/assets/df6807d2-fb33-4d84-adb4-67e42f5bc141" />
+</p>
+
+
 ## 🚀 Overview:
 
-StudyVault is a RAG-powered Personal Learning Assistant that helps students learn from their own study materials. Users can upload PDF documents, ask questions about their content, and receive clear, context-aware answers generated using Retrieval-Augmented Generation (RAG) with Gemini.
+> StudyVault is a RAG-powered Personal Learning Assistant that helps students learn from their own study materials. Users can upload PDF documents, ask questions about their content, and receive clear, context-aware answers generated using Retrieval-Augmented Generation (RAG) with Gemini.
 
-The system processes uploaded documents through text extraction, cleaning, chunking, semantic embeddings, and vector storage using ChromaDB. When a user asks a question, StudyVault retrieves the most relevant content from the uploaded documents and provides an answer with source and page citations, helping users understand and verify the information.
+> The system processes uploaded documents through text extraction, cleaning, chunking, semantic embeddings, and vector storage using ChromaDB. When a user asks a question, StudyVault retrieves the most relevant content from the uploaded documents and provides an answer with source and page citations, helping users understand and verify the information.
 
-StudyVault also includes conversation history, document management, semantic search, relevance filtering, and multiple Study Modes such as Explain, Summary, Quiz, Flashcards, and Key Points, providing an interactive learning experience through a Streamlit frontend and FastAPI backend.
+> StudyVault also includes conversation history, document management, semantic search, relevance filtering, and multiple Study Modes such as Explain, Summary, Quiz, Flashcards, and Key Points, providing an interactive learning experience through a Streamlit frontend and FastAPI backend.
 
 
 ## ✨ Features:
@@ -318,7 +323,7 @@ StudyVault-Personal-Learning-Assistant/
 
 ## 🔄 How It Works:
 <p align="center">
-<img width="1000" alt="ChatGPT Image Sep 17, 2026, 04_06_37 PM" src="https://github.com/user-attachments/assets/82f48ddf-6d2d-4b66-9891-8dcc99056830" />
+<img width="800" alt="ChatGPT Image Sep 17, 2026, 04_06_37 PM" src="https://github.com/user-attachments/assets/82f48ddf-6d2d-4b66-9891-8dcc99056830" />
 </p>
 
 
@@ -412,4 +417,211 @@ You can now upload your study materials, ask questions, view source citations, m
 - Gemini API key
 - Internet connection for the Gemini API and initial embedding model download
 
+
+## 🔌 API Endpoints:
+
+StudyVault provides RESTful APIs through the FastAPI backend for document management, semantic search, RAG-based question answering, and conversation management.
+
+### 📄 Document APIs:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/documents/upload` | Upload and process a PDF document |
+| `GET` | `/documents` | Retrieve all uploaded documents |
+| `DELETE` | `/documents/{document_id}` | Delete a document and its associated data |
+
+### 🔎 Search API:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/search` | Perform semantic similarity search across uploaded documents |
+
+**Request Example:**
+
+```json
+{
+  "query": "What is machine learning?",
+  "top_k": 5
+  "conversation_id": null
+}
+```
+
+### 🤖 Question Answering API:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/ask` | Generate a RAG-based answer using relevant document context |
+
+### 💬 Conversation APIs:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/conversations` | Create a new conversation |
+| `GET` | `/conversations` | Retrieve all conversations |
+| `GET` | `/conversations/{conversation_id}` | Retrieve conversation details |
+| `GET` | `/conversations/{conversation_id}/messages` | Retrieve messages from a conversation |
+| `PATCH` | `/conversations/{conversation_id}` | Rename a conversation |
+| `DELETE` | `/conversations/{conversation_id}` | Delete a conversation and its messages |
+
+### ❤️ Health Check:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/health` | Check whether the API is running |
+
+
+### 📖 Interactive API Documentation:
+
+FastAPI automatically provides interactive API documentation:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+Alternative OpenAPI documentation:
+
+```
+http://127.0.0.1:8000/redoc
+```
+
+
+## 🧪 Testing:
+
+StudyVault uses **pytest** to validate the functionality of its core components and APIs.
+
+### Test Areas:
+
+- **API Testing** — Validates FastAPI endpoints and API responses.
+- **Document Processing** — Tests PDF text extraction, text cleaning, and chunking.
+- **Embedding Service** — Validates embedding generation and vector dimensions.
+- **Vector Store** — Tests ChromaDB storage, retrieval, document management, and deletion.
+- **Semantic Retrieval** — Validates query embedding and relevant document retrieval.
+- **RAG Service** — Tests context retrieval, prompt generation, relevance filtering, and answer generation.
+- **LLM Service** — Validates Gemini integration and response generation.
+- **Database** — Tests SQLite conversations, messages, and document metadata.
+- **Conversation APIs** — Tests conversation creation, retrieval, renaming, and deletion.
+- **Document APIs** — Tests document upload, validation, duplicate detection, and deletion.
+
+### Running Tests:
+
+Activate the virtual environment and run:
+
+```bash
+pytest
+```
+
+### Run Tests with Coverage:
+
+```
+pytest --cov=backend --cov-report=term-missing
+```
+
+### Test Structure:
+```
+tests/
+├── test_api.py
+├── test_ask_api.py
+├── test_chunking.py
+├── test_conversation_api.py
+├── test_database.py
+├── test_database2.py
+├── test_document_api.py
+├── test_embeddings.py
+├── test_llm.py
+├── test_rag.py
+├── test_retrieval.py
+└── test_vector_store.py
+```
+
+The test suite helps verify that the major StudyVault components work correctly and that changes to the application do not break existing functionality.
+
+
+
+## ⚠️ Limitations:
+
+- **PDF-Only Document Support** — The current document processing pipeline is designed to support PDF files. Other formats such as DOCX, TXT, and Markdown are not currently supported.
+
+- **Local Data Storage** — Uploaded documents, ChromaDB vector data, and SQLite database records are stored locally on the system.
+
+- **Single-User Application** — StudyVault currently does not include user authentication, authorization, or multi-user account management.
+
+- **LLM Dependency** — Answer generation depends on the availability and configuration of the Gemini API.
+
+- **Retrieval Dependency** — The quality of generated answers depends on the quality of document extraction, chunking, embeddings, and semantic retrieval.
+
+- **Context-Based Answers** — StudyVault is designed to answer questions using information retrieved from the uploaded study materials. If relevant information is not available, the system may indicate that it could not find sufficient information.
+
+- **Scanned PDF Limitations** — PDFs containing primarily scanned images may not provide extractable text unless OCR processing is added.
+
+- **Local Resource Usage** — Embedding generation and vector database operations use the local machine's available CPU, memory, and storage resources.
+
+- **No Production Deployment** — The current version is designed for local development and demonstration and has not been deployed as a production application.
+
+- **No Advanced Authentication or Security Layer** — The current implementation does not provide production-grade authentication, role-based access control, or advanced security features.
+
+- **Limited Conversation Intelligence** — Conversation history is maintained, but advanced query rewriting and sophisticated conversational retrieval techniques are not currently implemented.
+
+
+
+## 🚀 Future Enhancements:
+
+- 📄 **Multi-Format Document Support** — Extend document processing to support DOCX, TXT, and Markdown files in addition to PDFs.
+
+- 🔐 **User Authentication & Authorization** — Add secure user accounts, authentication, and authorization for personalized learning environments.
+
+- 👥 **Multi-User Support** — Enable multiple users to maintain separate documents, conversations, and learning history.
+
+- 🔎 **Advanced Retrieval** — Improve retrieval using techniques such as hybrid search, reranking, and query expansion for better context selection.
+
+- 🧠 **Advanced Conversational RAG** — Implement query rewriting and context-aware retrieval to improve responses to follow-up questions.
+
+- 📝 **OCR Support** — Add Optical Character Recognition (OCR) to extract text from scanned and image-based documents.
+
+- 📊 **Learning Analytics** — Track learning activity, frequently studied topics, quiz performance, and revision progress.
+
+- 🎯 **Personalized Learning Paths** — Generate customized learning plans based on the user's study materials and learning progress.
+
+- 🧩 **More Study Modes** — Expand the existing Study Modes with additional workflows such as practice tests, concept maps, and exam preparation.
+
+- 🌐 **Production Deployment** — Deploy the application with scalable cloud infrastructure and persistent storage.
+
+- 🔒 **Enhanced Security** — Add production-grade security measures including secure API handling, access controls, and data protection.
+
+- ⚡ **Performance Optimization** — Improve document processing, embedding generation, retrieval speed, and overall application responsiveness.
+
+- 💾 **Cloud Storage Integration** — Support cloud-based storage for documents, vector databases, and application data.
+
+- 📱 **Responsive Interface** — Improve the user interface for a better experience across desktop, tablet, and mobile devices.
+
+
+## Screenshots:
+
+### 🖥️ StudyVault User Interface:
+
+<p align="center">
+<img width="900" alt="Screenshot 2026-09-16 230825" src="https://github.com/user-attachments/assets/197a2229-0c5e-47c6-8c75-bfe26ec711fa" />
+</p>
+
+### FastAPI Swagger Documentation:
+
+<p align="center">
+<img width="800" alt="Screenshot 2026-09-16 161124" src="https://github.com/user-attachments/assets/c04caacc-459d-4e74-8f66-2d0599ad9591" />
+</p>
+
+
+
+
+## 👨‍💻 Author
+
+**Siva Narayana Muppidi**
+
+- 💻 GitHub: [msns-1927](https://github.com/msns-1927)
+- 🔗 LinkedIn: [Siva Narayana Muppidi](https://www.linkedin.com/in/siva-narayana-muppidi-413259230/)
+
+
+## ⭐ If You Like StudyVault
+
+If you found **StudyVault** useful or interesting, consider giving the repository a ⭐ **star** on GitHub. Your support and feedback are greatly appreciated!
+
+> ⭐ **Like the project? Star the repository and help support its development!**
 
